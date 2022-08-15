@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <title>Appointment Form</title>
+    <h1>Fill in the form for your Appointment</h1>
+    {% if request.user.is_authenticated %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{request.user}}
+        <br>
+        <br>
+        {{form.as_p}}
+
+        <button type="submit">Book Your Appointment</button>
+    </form>
+    {% else %}
+
+    <h1>You're NOt Supposed To be here</h1>
+    <a href="{% url 'register_customer' %}">Register First</a>
+    {% endif %}
+
+{% endblock %}
