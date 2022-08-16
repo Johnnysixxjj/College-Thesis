@@ -1,5 +1,5 @@
 from pathlib import Path
-import django_heroku
+
 import dj_database_url
 import os
 from django.core.management.utils import get_random_secret_key
@@ -132,7 +132,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.yahoo.com'
