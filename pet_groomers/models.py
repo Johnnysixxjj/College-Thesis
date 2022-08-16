@@ -40,8 +40,12 @@ class Appointment(models.Model):
     pet = models.CharField(max_length=100)
     services_available = models.ManyToManyField(Services)
     day_of_appointment = models.CharField(max_length=200)
+    phone_numb = models.CharField(max_length=13, default="Enter Phone Number")
     email = models.EmailField()
     appointment_confirmation = models.BooleanField(default=False)
+    
+    check_if_services_finished = models.BooleanField(default=False)
+    report = models.TextField(default="Enter a report after the services", null=True, blank=True)
     
     def __str__(self):
         return str(self.owner + self.pet)

@@ -24,7 +24,9 @@ def front_page(request):
     
     return render(request, template_name, context)
     
-
+def customer_logout(request):
+    logout(request)
+    return redirect('/')
 
 def register_customer(request):
     
@@ -40,11 +42,11 @@ def register_customer(request):
         if password == password2:
             
             if User.objects.filter(username=username).exists():
-                print('Username AlreadyExists')
+                messages.error(request, "Username is already in Use")
                 return redirect('register_customer')
             
             elif User.objects.filter(email=email).exists():
-                print('Email Already Exists')
+                messages.error(request, "Email is already in Use")
                 return redirect('register_customer')
             
             print(username, email, first_name, last_name, password, password2)
@@ -84,29 +86,6 @@ def register_customer(request):
             
     return render(request, 'register_customer.html')
 
-"""
-def customer_profile(request):
-    
-    if request.method == "POST":
-        
-        custom_form = CustomerForm(request.POST)
-        if custom_form.is_valid():
-            reg = custom_form.save(commit=False)
-            
-            reg.save()
-            
-            return redirect('pet_registration')
-    
-    else:
-        custom_form = CustomerForm(None)
-        return render(request, 'register_customer.html', {'form':custom_form})
-        
-    
-    template_name = 'customer_profile.html'
-    
-    return render(request, template_name, {'form':custom_form})
-"""
-
 
 def register_pet(request):
     
@@ -142,7 +121,7 @@ def appointment_page(request):
             obj = appointments.save(commit=False)
             obj.owner = request.user.username
             obj.save()
-            print('appointment successful')
+            messages.success(request, "Appointment Successful")
 
             return redirect('/')
         else:

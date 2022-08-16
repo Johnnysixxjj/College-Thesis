@@ -2,8 +2,18 @@
 
 
 {% block content %}
-    <title>Basic Form</title>
+    <title>Register</title>
+    {% if request.user.is_authenticated %}
+    <h1>You are already Logged in</h1>
+    {% else %}
     <h1>Fill in the form if new Customer</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form action="" method="POST">
         {% csrf_token %}
 
@@ -28,5 +38,5 @@
         <button type="submit">RegisterAccount</button>
         <p>After Registering your account you need to fill up your pet form</p>
     </form>
-
+    {% endif %}
 {% endblock %}
