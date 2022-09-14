@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if request.user.is_authenticated %}
+
+<p>This the description of your current appointment</p>
+Full name: {{data.full_name}}
+<br/>
+Contact Number: {{data.contact_number}}
+<br/>
+Email: {{data.email_adress}}
+<br/>
+Services: {{data.service}}
+<br/>
+Appointment Date: {{data.appointment_date}}
+
+
+
+{% else %}
+<p><a href="{% url 'customer-login' %}">Login</a> first Before Viewing your Appointment</p>
+
+{% endif %}
+</form>
+
+{% endblock %}

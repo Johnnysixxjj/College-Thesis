@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" method="POST">
+<h1>Update your Appointment</h1>
+{% if request.user.is_authenticated %}
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Update</button>
+{% else %}
+<p><a href="{% url 'customer-login' %}">Login</a> first Before adding your profile</p>
+
+{% endif %}
+</form>
+
+{% endblock %}
