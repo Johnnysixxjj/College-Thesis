@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <title>Register</title>
+    {% if request.user.is_authenticated %}
+    <h1>You are already Logged in</h1>
+    {% else %}
+    <h1>Register</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <label for="Username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required><br><br>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required><br><br>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="password2" required><br><br>
+
+        <button type="submit">RegisterAccount</button>
+        <p>After Registering your account you need to fill up your pet form</p>
+    </form>
+    {% endif %}
+{% endblock %}
