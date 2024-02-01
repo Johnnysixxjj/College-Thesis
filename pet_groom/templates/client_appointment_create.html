@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+</style>
+
+<div class="container">
+
+<form action="" method="POST">
+<h1>Make an appointment for you and your pet</h1>
+{% if request.user.is_authenticated %}
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Submit</button>
+        <p>If a change is needed for the appointment date use the chat system to talk to an employee </p>
+{% else %}
+<p><a href="{% url 'customer-login' %}">Login</a> first Before adding your profile</p>
+
+{% endif %}
+</form>
+
+</div>
+
+<script type="text/javascript">
+        (function(d, m){
+    
+        /*---------------- Kommunicate settings start ----------------*/
+    
+         var kommunicateSettings = {
+          "appId": "<APP_ID>",  
+          "automaticChatOpenOnNavigation": true,
+          "popupWidget": true
+          /*
+          "onInit": function (){
+            // paste your code here
+          }
+          */
+          };
+    
+        /*----------------- Kommunicate settings end ------------------*/
+    
+         var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+          var h = document.getElementsByTagName("head")[0];
+          h.appendChild(s);
+          window.kommunicate = m;
+          m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
+    
+
+{% endblock %}
+

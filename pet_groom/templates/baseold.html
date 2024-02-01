@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pet Groomers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Pet Groomers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %}
+              
+              <li class="nav-item">
+                <a class="nav-link disabled">Welcome {{request.user.username}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'update-customer-profile' request.user.id %}">Edit document</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'customer-logout' %}">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'customer_appointment' %}">Book an Appointment</a>
+              </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'customer-register' %}">Register Now!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'customer-login' %}">Login!</a>
+            </li>
+            {% endif %}
+            <!--<li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">About Us</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link disabled">For Questions, Give us a call or text at 099999696969</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+
+
+  </head>
+  <body>
+    <h1>Welcome To Pet Groomers</h1>
+    <hr/>
+    
+    <style>
+      .float-continer{
+        border: 3px solid #fff;
+        padding: 20px;
+      }
+
+      .float-child {
+        width: 50%;
+        float: left;
+        padding: 20px;
+        border: 2px solid
+      }
+
+    </style>
+
+
+    {% if None %}
+
+
+    {% else %}
+    <div class="float-container">
+
+
+      <div class="float-child">
+        {% for data in dataset %}
+
+        <strong>{{data.service_name}}</strong>
+        <br/>
+        <br/>
+        {{data.service_description}}
+        <br/>
+        <h4>{{data.prices}}PHP</h4>
+        <hr/>
+        {% endfor %}
+      </div>
+
+      <div class="float-child">
+        <p>Dates unavailable: month/day/year</p>
+        {% for appointment in appointments %}
+          <strong>Dates and time Taken:{{appointment.appointment_date}} - {{appointment.time_of_day}} </strong>
+          
+          <br/>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% block content %}
+
+
+
+    {% endblock content %}
+    
+
+    <script type="text/javascript">
+      (function(d, m){
+          var kommunicateSettings = 
+              {"appId":"17346d8b23f39f95da4b67bad701e3d88","popupWidget":true,"automaticChatOpenOnNavigation":true};
+          var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+          s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+          var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+          window.kommunicate = m; m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+  /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    </script>
+    
+  
+  </body>
+</html>

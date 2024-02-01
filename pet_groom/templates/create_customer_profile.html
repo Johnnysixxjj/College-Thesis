@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+</style>
+
+<div class="container">
+    <form action="" method="POST">
+    <h1>Create Document for you and your pet...</h1>
+    {% if request.user.is_authenticated %}
+        {% if request.user == obj.user %}
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Submit</button>
+        {% endif %}
+    {% else %}
+    <p><a href="{% url 'customer-login' %}">Login</a> first Before adding your profile</p>
+
+    {% endif %}
+    </form>
+</div>
+
+{% endblock %}
